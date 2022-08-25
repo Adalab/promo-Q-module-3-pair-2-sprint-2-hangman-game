@@ -1,13 +1,14 @@
-import '../styles/Letters.scss';
+import "../styles/Letters.scss";
+import propTypes from "prop-types";
 
-function SolutionLetters(props) {
+function SolutionLetters({ word, userLetters }) {
   const renderSolutionLetters = () => {
-    const wordLetters = props.word.split('');
+    const wordLetters = word.split("");
     return wordLetters.map((letter, index) => {
-      const exists = props.userLetters.includes(letter.toLocaleLowerCase());
+      const exists = userLetters.includes(letter.toLocaleLowerCase());
       return (
         <li key={index} className="letter">
-          {exists ? letter : ''}
+          {exists ? letter : ""}
         </li>
       );
     });
@@ -20,5 +21,15 @@ function SolutionLetters(props) {
     </div>
   );
 }
+
+SolutionLetters.defaultProps = {
+  word: "perrete",
+  userLetters: [], //esto son las letras de la usuaria
+};
+
+SolutionLetters.propTypes = {
+  word: propTypes.string.isRequired,
+  userLetters: propTypes.array,
+};
 
 export default SolutionLetters;

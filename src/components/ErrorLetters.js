@@ -1,11 +1,11 @@
-import '../styles/Letters.scss';
+import "../styles/Letters.scss";
+import propTypes from "prop-types";
 
-function ErrorLetters(props) {
+function ErrorLetters({ userLetters, word }) {
   const renderErrorLetters = () => {
-    const errorLetters = props.userLetters.filter(
+    const errorLetters = userLetters.filter(
       (letter) =>
-        props.word.toLocaleLowerCase().includes(letter.toLocaleLowerCase()) ===
-        false
+        word.toLocaleLowerCase().includes(letter.toLocaleLowerCase()) === false
     );
     return errorLetters.map((letter, index) => {
       return (
@@ -23,5 +23,15 @@ function ErrorLetters(props) {
     </div>
   );
 }
+
+ErrorLetters.defaultProps = {
+  word: "perrete",
+  userLetters: [], //esto son las letras de la usuaria
+};
+
+ErrorLetters.propTypes = {
+  word: propTypes.string.isRequired,
+  userLetters: propTypes.array,
+};
 
 export default ErrorLetters;

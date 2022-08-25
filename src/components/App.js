@@ -1,30 +1,33 @@
-import { useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { Route, Routes } from "react-router-dom";
 
 // api
-import getWordFromApi from '../services/api';
+import getWordFromApi from "../services/api";
 // styles
-import '../styles/App.scss';
-import '../styles/Form.scss';
+import "../styles/App.scss";
+import "../styles/Form.scss";
 
 //components
-import Header from './Header';
-import Dummy from './Dummy';
-import SolutionLetters from './SolutionLetters';
-import ErrorLetters from './ErrorLetters';
-import Form from './Form';
-import Footer from './Footer';
-import Instructions from './Instructions';
-import Options from './Options';
+import Header from "./Header";
+import Dummy from "./Dummy";
+import SolutionLetters from "./SolutionLetters";
+import ErrorLetters from "./ErrorLetters";
+import Form from "./Form";
+import Footer from "./Footer";
+import Instructions from "./Instructions";
+import Options from "./Options";
+import Loading from "./Loading";
 
 function App() {
-  const [word, setWord] = useState('');
+  const [word, setWord] = useState("");
   const [userLetters, setUserLetters] = useState([]);
-  const [lastLetter, setLastLetter] = useState('');
+  const [lastLetter, setLastLetter] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getWordFromApi().then((word) => {
       setWord(word);
+      setIsLoading(false);
     });
   }, []);
 
@@ -32,7 +35,7 @@ function App() {
 
   const handleMultiplayer = (value) => {
     setWord(value);
-    setLastLetter('');
+    setLastLetter("");
     setUserLetters([]);
   };
 
@@ -66,6 +69,7 @@ function App() {
             path="/"
             element={
               <section>
+                <Loading loading={isLoading} />
                 <SolutionLetters word={word} userLetters={userLetters} />
                 <ErrorLetters word={word} userLetters={userLetters} />
                 <Form

@@ -1,10 +1,10 @@
-function Options(props) {
+function Options({ handleMultiplayer, word }) {
   const handleForm = (ev) => {
     ev.preventDefault();
   };
 
   const handleChange = (ev) => {
-    props.handleMultiplayer(ev.target.value);
+    handleMultiplayer(ev.target.value);
   };
 
   return (
@@ -21,10 +21,14 @@ function Options(props) {
         id="word"
         name="word"
         onChange={handleChange}
-        value={props.word}
+        value={word}
       />
     </form>
   );
 }
+
+Options.defaultProps = {
+  word: "perrete",
+};
 
 export default Options;

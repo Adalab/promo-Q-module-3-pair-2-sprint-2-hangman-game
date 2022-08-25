@@ -1,8 +1,9 @@
-import '../styles/Dummy.scss';
+import "../styles/Dummy.scss";
+import propTypes from "prop-types";
 
-function Dummy(props) {
+function Dummy({ numberOfErrors }) {
   return (
-    <section className={`dummy error-${props.numberOfErrors}`}>
+    <section className={`dummy error-${numberOfErrors}`}>
       <span className="error-13 eye"></span>
       <span className="error-12 eye"></span>
       <span className="error-11 line"></span>
@@ -19,5 +20,13 @@ function Dummy(props) {
     </section>
   );
 }
+
+Dummy.defaultProps = {
+  numberOfErrors: 0,
+};
+
+Dummy.propTypes = {
+  numberOfErrors: propTypes.number.isRequired,
+};
 
 export default Dummy;
